@@ -8,8 +8,9 @@ class Efectores:
 	def clic(self, arreglo_clic):
 		mouse = PyMouse()
 		for posicion_x,posicion_y in arreglo_clic:
-			mouse.click(posicion_x, posicion_y, 1)
 			#El numero (tercer argumento) significa el tipo de clic, 1 clic izquierdo y 2 clic derecho
+			mouse.click(posicion_x, posicion_y, 1)
+			
 		
 	def teclado(self, tecla):
 		key = PyKeyboard()

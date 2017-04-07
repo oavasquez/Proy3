@@ -1,5 +1,5 @@
-from util.CapturarPantalla import CapturarPantalla
-from util.Leer import Leer
+from sensores.CapturarPantalla import CapturarPantalla
+from sensores.Leer import Leer
 
 
 def main():
