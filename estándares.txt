@@ -1,0 +1,34 @@
+PROYECTO DE INTELIGENCIA ARTIFICIAL
+WALTER, OSCAR Y AXEL
+
+DEFINICIÓN DE ESTÁNDARES:
+
+*Nomenclaturas: se decidirá hacerlo sólo en inglés o sólo en español, para los nombres que definamos nosotros
+
+*Clases: Las clases se definirán con inicial mayúscula, para el archivo se utilizará el mismo nombre de la clase  ej.
+		Perro.py -> class Perro:
+
+*Objetos: con inicial minúscula, ej.
+		perro = Perro()
+
+*Métodos: Los métodos se definirán con inicial minúscula y las palabras separadas con guión bajo ej.
+		def saltar(self): , def ladrar_duro(self): , def hacerse_el_muertito(self): , etc.
+		->	perro.ladrar_duro()
+
+*Comentarios: siempre encima del código al cual hace referencia ej.
+		#Este codigo tiene una funcion bien loca
+		def funcion_loca():
+			pass
+
+*Tabulaciones de 4 espacios: en su SublimeText pueden abrir los "settings" del usuario y copian y pegan esto:
+		{
+		"font_size": 12,
+		"update_check": false,
+		"tab_size": 4
+		}
+
+*Carpetas: las nomenclaturas de las carpetas en letras minúsculas, esto nos ayudará a diferenciar las carpetas de los archivos al momento de importarlas, ej.
+		from animales.Perro import Perro
+		from animales.Perro import Aguacatero
+		->  (donde "animales" es una carpeta, "Perro" es un archivo y una clase, y "Aguacatero" es una clase 
+			definida en el mismo archivo "Perro.py")

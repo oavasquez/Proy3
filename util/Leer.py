@@ -1,11 +1,12 @@
 from PIL import Image,ImageFilter
 import numpy
+
+
 class Leer:
 	def __init__(self):
-		val=0
+		pass
 	
-	
-	def leerImagen(sef,ruta):
+	def leer_imagen(sef,ruta):
 		imageFile = Image.open(ruta).convert(mode='L', dither=3)
 		imageSize = imageFile.size
 		rawData = imageFile.tobytes('raw')

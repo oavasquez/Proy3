@@ -1,21 +1,20 @@
 import pyscreenshot as ImageGrab
 import os
-##install pyscreenshot
 
 class CapturarPantalla:
 	def __init__(self):
-		va=0
+		pass
 		
 
-	def capturarFullSize(self):
-		im=ImageGrab.grab()
-		im.save( os.getcwd()+'/util/Capturas/im.png')
-		return os.getcwd()+'/util/Capturas/im.png'	
+	def capturar_completa(self):
+		imagen = ImageGrab.grab()
+		imagen.save(os.getcwd() + '/util/Capturas/im.png')
+		return os.getcwd() + '/util/Capturas/im.png'	
 	
 
-	def capturarReducida(self,x,y,height,width,):
-		im=ImageGrab.grab(bbox=(x,y,height,width))
-		im.save( os.getcwd()+'/Capturas/imreducida.png')
+	def capturar_reducida(self, x, y, height, width):
+		imagen = ImageGrab.grab(bbox=(x, y, height, width))
+		imagen.save(os.getcwd() + '/Capturas/imreducida.png')
 	
 
 

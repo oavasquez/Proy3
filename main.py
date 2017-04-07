@@ -2,9 +2,13 @@ from util.CapturarPantalla import CapturarPantalla
 from util.Leer import Leer
 
 
+def main():
+	capturador = CapturarPantalla()
+	ruta = capturador.capturar_completa()
 
-ci=CapturarPantalla()
-ruta=ci.capturarFullSize()
+	lector = Leer()
+	lector.leer_imagen(ruta)
 
-Leer=Leer()
-Leer.leerImagen(ruta)
+
+if __name__ == '__main__':
+	main()
