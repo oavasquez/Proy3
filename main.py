@@ -8,3 +8,4 @@ ruta=ci.capturarFullSize()
 
 Leer=Leer()
 Leer.leerImagen(ruta)
+Leer.comparar()
