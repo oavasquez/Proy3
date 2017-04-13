@@ -1,12 +1,16 @@
-from util.CapturarPantalla import CapturarPantalla
-from util.Leer import Leer
+from sensores.CapturarPantalla import CapturarPantalla
+from sensores.Leer import Leer
 
 
+def main():
 
+	ci=CapturarPantalla()
+	ruta=ci.capturar_completa()
 
-ci=CapturarPantalla()
-ruta=ci.capturarFullSize()
+	leer=Leer(ruta)
+	leer.identificarJuego()
+	leer.arregloImage()
 
-Leer=Leer(ruta)
-Leer.identificarJuego()
-Leer.arregloImage()
+if __name__ == '__main__':
+	main()
+

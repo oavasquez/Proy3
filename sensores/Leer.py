@@ -1,5 +1,6 @@
 from PIL import Image,ImageFilter
 import numpy
+
 import os
 
 import ImageChops
@@ -35,10 +36,8 @@ class Leer:
 		else:
 			print "No se reconoce ningun juego"
 
-
-		
-
-	def obtenerImagen(self,ruta):
+	
+	def obtenerImagen(sef,ruta):
 		imageFile = Image.open(ruta).convert(mode='L', dither=3)
 		imageSize = imageFile.size
 		rawData = imageFile.tobytes('raw')
