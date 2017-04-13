@@ -3,9 +3,10 @@ from util.Leer import Leer
 
 
 
+
 ci=CapturarPantalla()
 ruta=ci.capturarFullSize()
 
-Leer=Leer()
-Leer.leerImagen(ruta)
-Leer.comparar()
+Leer=Leer(ruta)
+Leer.identificarJuego()
+Leer.arregloImage()
