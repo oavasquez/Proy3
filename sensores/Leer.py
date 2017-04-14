@@ -16,6 +16,7 @@ class Leer:
 		self.ruta=ruta
 		self.jugando2048=False
 		self.jugandoFloodit=False
+		self.nt=notificacion()
 
 
 	def identificar_juego(self):
@@ -30,22 +31,18 @@ class Leer:
 		imagencomb=ImageChops.multiply(img2048, imgFloofit)
 	
 		errcomb=self.calcular_RMS(imgActual,imagencomb)
-		nt=notificacion()
-
-		print self.errfloodit
-
+		
 
 
 		if self.err2048<60 or self.errfloodit<60:
 			if self.err2048<self.errfloodit:
-				nt.mirando("2048")
+				self.nt.mirando("2048")
 				self.jugando2048=True
 			elif self.errfloodit<self.err2048:
-				nt.mirando("Floot-It")
-				
+				self.nt.mirando("Floot-It")
 				self.jugandoFloodit=True
 		else:
-			nt.no_mirando()
+			self.nt.no_mirando()
 
 	
 	def obtener_imagen(sef,ruta):
@@ -66,30 +63,41 @@ class Leer:
 
 		if self.jugandoFloodit:
 			imgGameOver=self.obtener_imagen(os.getcwd()+"/util/Capturas/floodit/gameOver.png")
+			imgContinuar=self.obtener_imagen(os.getcwd()+"/util/Capturas/floodit/continuar.png")
 			imgActual=self.obtener_imagen(self.ruta)
 
-			imgActual=self.transformar_bn(imgActual)
+			imgActual=self.transformar_bn_floodit(imgActual)
+		
 
-		
-		
-			
 			errorGameOver=self.calcular_RMS(imgGameOver,imgActual)
+			errorContinuar=self.calcular_RMS(imgContinuar,imgActual)
 
-			if errorGameOver>=0 and errorGameOver<=1:
+			
+
+			if errorContinuar>8:
 					print "el juego a terminado en floodit"
+					self.nt.juego_terminado()
 
 			
 
-		elif self.jugando2048:
+		if self.jugando2048:
 			imgGameOver=self.obtener_imagen(os.getcwd()+"/util/Capturas/2048/gameOver.png")
+			imgContinuar=self.obtener_imagen(os.getcwd()+"/util/Capturas/2048/continuar.png")
+		
 			imgActual=self.obtener_imagen(self.ruta)
 
-			imgActual=self.transformar_bn(imgActual)
+			imgActual=self.transformar_bn_2048(imgActual)
+
 			
 			errorGameOver=self.calcular_RMS(imgGameOver,imgActual)
+			errorContinuar=self.calcular_RMS(imgContinuar,imgActual)
 
-			if errorGameOver>=0 and errorGameOver<=1:
+			
+			
+
+			if errorGameOver<50:
 					print "el juego a terminado en 2048"
+					self.nt.juego_terminado()
 
 
 	def arreglo_image(self):
@@ -110,11 +118,24 @@ class Leer:
 		imgPatron = Image.fromarray(patron)
 		imgPatron.show()
 
-	def transformar_bn(self,img):
+	def transformar_bn_2048(self,img):
 		patron = numpy.asarray(img, dtype="float") 
 		for i in range(len(patron)):
 			for j in range(len(patron[0])):
-				if patron[i][j]==111: 
+				if patron[i][j]==175: 
+					patron[i][j] = 0.0
+				else:
+					patron[i][j] = 255.0
+		
+
+		imgPatron = Image.fromarray(patron.astype('uint8'))
+		return imgPatron
+
+	def transformar_bn_floodit(self,img):
+		patron = numpy.asarray(img, dtype="float") 
+		for i in range(len(patron)):
+			for j in range(len(patron[0])):
+				if patron[i][j]==0.0: 
 					patron[i][j] = 0.0
 				else:
 					patron[i][j] = 255.0
