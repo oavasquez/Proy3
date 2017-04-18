@@ -45,11 +45,14 @@ class Leer:
 			self.nt.no_mirando()
 
 	
-	def obtener_imagen(sef,ruta):
+	def obtener_imagen(self,ruta):
 		imageFile = Image.open(ruta).convert(mode='L', dither=3)
 		imageSize = imageFile.size
 		rawData = imageFile.tobytes('raw')
 		img = Image.frombytes('L', imageSize, rawData)
+		imagenArreglo = numpy.asarray(img, dtype="float")
+		self.detectar_cuadrado(imagenArreglo) 
+
 		#numpy.savetxt(os.getcwd()+"/util/Capturas/array.csv", img, delimiter=",",fmt='%s')
 
 		return img
@@ -71,10 +74,11 @@ class Leer:
 
 			errorGameOver=self.calcular_RMS(imgGameOver,imgActual)
 			errorContinuar=self.calcular_RMS(imgContinuar,imgActual)
+			print errorContinuar,errorGameOver
 
 			
 
-			if errorContinuar>8:
+			if errorGameOver<5:
 					print "el juego a terminado en floodit"
 					self.nt.juego_terminado()
 
@@ -144,6 +148,23 @@ class Leer:
 		imgPatron = Image.fromarray(patron.astype('uint8'))
 		return imgPatron
 
+	def detectar_cuadrado(self,arregloImagen):
+		arreglo=[]
+		for indiceFila, fila in enumerate(arregloImagen):
+			for indiceColum, columna in enumerate(fila):
+				if columna==175:
+					arreglo.append(fila)
+					break
+
+					
+		patron=numpy.array(arreglo)
+		imgPatron = Image.fromarray(patron.astype('uint8'))
+		imgPatron.show()
+
+
+					
+
+		
 
 
 

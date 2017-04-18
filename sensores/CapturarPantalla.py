@@ -14,7 +14,8 @@ class CapturarPantalla:
 
 	def capturar_reducida(self, x, y, height, width):
 		imagen = ImageGrab.grab(bbox=(x, y, height, width))
-		imagen.save(os.getcwd() + '/Capturas/imreducida.png')
+		imagen.save(os.getcwd() + '/util/Capturas/im_reducida.png')
+
 	
 
 
