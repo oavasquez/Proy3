@@ -8,12 +8,14 @@ class Leer_RGB():
 	def __init__(self):
 		pass
 
+
 	def LeerImagen(self,ruta):
 		img=Image.open(ruta)
 		img = img.convert('RGB')
 		arreglo = np.array(img)
 		self.buscarJuego2(arreglo)
 	
+
 	#se le puede cambiar por BuscarBordeFlood_it
 	def buscarJuego(self,arreglo):
 		ArregloCantPixel=[]
@@ -84,18 +86,10 @@ class Leer_RGB():
 
 		print len(imagenArreglo),len(imagenArreglo[0])
 		
-
-
-
-
-
 		
 		patron=np.array(arregloColor)
 		imgPatron = Image.fromarray(patron.astype('uint8'))
 		imgPatron.show()
-
-
-
 
 
 	def buscarJuego2(self,arreglo):
@@ -113,22 +107,16 @@ class Leer_RGB():
 			ArregloCantPixel.append([x,contadorPixel])
 			contadorPixel=0
 		
-
-		
 		#encontrar el maximo valor de pixeles negros 
 		maxPixel=[]
 		for x,contadorPixel in ArregloCantPixel:
 			maxPixel.append(contadorPixel)
-
-
-
 		maximoValor=max(maxPixel)
 		print maximoValor
 		maximoValorCont=0
 
+
 		#luego buscamos de cuanto es el grosor de los bordes
-
-
 		for elemento in maxPixel:
 			if elemento==maximoValor:
 				maximoValorCont=maximoValorCont+1
@@ -136,34 +124,28 @@ class Leer_RGB():
 		
 
 		#ademas buscamos cuales son los ejes en donde estan los bordes
-
-		
 		bordeDectectadoX=[]
 		ejeX=[]
-		
 		for i in range(len(arreglo)):
 			x,contadorPixel=ArregloCantPixel[i]
 			if contadorPixel==maximoValor:
 				bordeDectectadoX.append(arreglo[x])
 				ejeX.append(x)
 		
-
 		ejeY=[]
 		for y,columna in enumerate(bordeDectectadoX[0]):
 				if np.array_equal(columna,[187,173,160]):
 					ejeY.append(y)
 
-		#recoremos el arreglo en donde todo lo que este dentro de los limites
-		#osea los borde se agrege a un arreglo
 
+		#recorremos el arreglo en donde todo lo que este dentro de los limites
+		#osea los borde se agrege a un arreglo
 		imagenArreglo=[]
 		for fila in arreglo[range(ejeX[0],ejeX[-1])]:
 			imagenArreglo.append(fila[range(ejeY[0],ejeY[-1])])
 
+
 		#el arreglo se convierte en imagen para prueba de lo que contiene el arreglo 
-
-		
-
 		arregloNumero=[]
 		arregloContenedorNum=[]
 		contaf=40
@@ -184,7 +166,6 @@ class Leer_RGB():
 			contac=40
 			contbc=100
 
-
 		mostrarNumero=[]
 		for arregloNum in arregloContenedorNum:
 			mostrarNumero.append(self.BuscarNumero(arregloNum))
@@ -193,7 +174,7 @@ class Leer_RGB():
 		
 		patron=np.array(imagenArreglo)
 		imgPatron = Image.fromarray(patron.astype('uint8'))
-		imgPatron.show()
+		#imgPatron.show()
 		
 		
 
@@ -244,12 +225,3 @@ class Leer_RGB():
 			if not valor==1:
 				break
 		return valor
-
-
-
-
-		
-
-
-
-		
