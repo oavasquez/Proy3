@@ -1,0 +1,53 @@
+POSICIONES PIVOTE
+
+2048:
+	CELDA #1:	x: 492	y: 281
+	CELDA #2:	x: 601	y: 281
+	CELDA #3:	x: 711	y: 281
+	CELDA #4:	x: 820	y: 281
+
+	CELDA #5:	x: 492	y: 390
+	CELDA #6:	x: 601	y: 390
+	CELDA #7:	x: 711	y: 390
+	CELDA #8:	x: 820	y: 390
+
+	CELDA #9:	x: 492	y: 500
+	CELDA #10:	x: 601	y: 500
+	CELDA #11:	x: 711	y: 500
+	CELDA #12:	x: 820	y: 500
+
+	CELDA #13:	x: 492 	y: 609 
+	CELDA #14:	x: 601	y: 609
+	CELDA #15:	x: 711	y: 609
+	CELDA #16:	x: 820	y: 609
+
+
+FLOOD-IT:
+	COLORES (RGB):
+		No. 0	AMARILLO:	[255, 255, 0]
+		No. 1	CYAN:		[0, 255, 255]
+		No. 2	MORADO:		[128, 0, 128]
+		No. 3	ROJO:		[255, 0, 0]
+		No. 4	SALMON: 	[255, 204, 102]
+		No. 5	VERDE:		[0, 187, 0]
+
+	POSICIONES:
+		CELDA #1:	x: 570	y: 223
+		CELDA #2:	x: 590	y: 223
+		CELDA #3:	x: 610	y: 223
+		...
+		CELDA #14:	x: 830	y: 223 
+		.
+		.
+		.
+		CELDA #15:	x: 570	y: 243
+		.
+		.
+		.
+		CELDA #29:	x: 570	y: 263
+		.
+		.
+		.
+		CELDA #183:	x: 570	y: 483
+		...
+		CELDA #196:	x: 830	y: 483

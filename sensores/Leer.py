@@ -1,12 +1,9 @@
 from PIL import Image,ImageFilter
 import numpy
-
-
 import os
-
 import ImageChops
 import math, operator
-from util.notificacion import notificacion
+from util.Notificacion import Notificacion
 
 class Leer:
 	def __init__(self,ruta):
@@ -16,11 +13,10 @@ class Leer:
 		self.ruta=ruta
 		self.jugando2048=False
 		self.jugandoFloodit=False
-		self.nt=notificacion()
+		self.nt=Notificacion()
 
 
 	def identificar_juego(self):
-		
 		imgActual=self.obtener_imagen(self.ruta)
 		img2048=self.obtener_imagen(os.getcwd()+"/util/Capturas/2048/2048.png")
 		imgFloofit=self.obtener_imagen(os.getcwd()+"/util/Capturas/floodit/floodit.png")
@@ -32,8 +28,6 @@ class Leer:
 	
 		errcomb=self.calcular_RMS(imgActual,imagencomb)
 		
-
-
 		if self.err2048<60 or self.errfloodit<60:
 			if self.err2048<self.errfloodit:
 				self.nt.mirando("2048")
@@ -51,7 +45,8 @@ class Leer:
 		rawData = imageFile.tobytes('raw')
 		img = Image.frombytes('L', imageSize, rawData)
 		imagenArreglo = numpy.asarray(img, dtype="float")
-		self.detectar_cuadrado(imagenArreglo) 
+		self.detectar_cuadrado(imagenArreglo)
+		imageFile.close()
 
 		#numpy.savetxt(os.getcwd()+"/util/Capturas/array.csv", img, delimiter=",",fmt='%s')
 
@@ -120,7 +115,7 @@ class Leer:
 		
 
 		imgPatron = Image.fromarray(patron)
-		imgPatron.show()
+		#imgPatron.show()
 
 	def transformar_bn_2048(self,img):
 		patron = numpy.asarray(img, dtype="float") 
@@ -148,7 +143,7 @@ class Leer:
 		imgPatron = Image.fromarray(patron.astype('uint8'))
 		return imgPatron
 
-	def detectar_cuadrado(self,arregloImagen):
+	def detectar_cuadrado(self, arregloImagen):
 		arreglo=[]
 		for indiceFila, fila in enumerate(arregloImagen):
 			for indiceColum, columna in enumerate(fila):
@@ -159,51 +154,4 @@ class Leer:
 					
 		patron=numpy.array(arreglo)
 		imgPatron = Image.fromarray(patron.astype('uint8'))
-		imgPatron.show()
-
-
-					
-
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
-
-
-		
-		
-
-
-
-				
-
-
-
-		
-
-		 
-		
+		#imgPatron.show()

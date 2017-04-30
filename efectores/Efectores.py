@@ -3,16 +3,14 @@ from pykeyboard import PyKeyboard
 
 class Efectores:
 	def __init__(self):
-		pass
+		self.tecla = PyKeyboard()
+		self.raton = PyMouse()
 
-	def clic(self, arreglo_clic):
-		mouse = PyMouse()
-		for posicion_x,posicion_y in arreglo_clic:
-			#El numero (tercer argumento) significa el tipo de clic, 1 clic izquierdo y 2 clic derecho
-			mouse.click(posicion_x, posicion_y, 1)
+	def clic(self, posicion_x, posicion_y): 
+		#El numero (tercer argumento) significa el tipo de clic, 1 clic izquierdo y 2 clic derecho
+		self.raton.click(posicion_x, posicion_y, 1)
 			
 		
 	def teclado(self, tecla):
-		key = PyKeyboard()
-		key.press_key(tecla)
-		key.release_key(tecla)
+		self.tecla.press_key(tecla)
+		self.tecla.release_key(tecla)
