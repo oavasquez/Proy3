@@ -65,11 +65,11 @@ def main():
 		while True:
 			pantalla_2048 = capturador.capturar_completa()
 			posiciones = mapeador.vector_de_posiciones
-			#print mapeador.consultar_colores(pantalla_2048)
+			vector_de_entrada = mapeador.consultar_colores(pantalla_2048)
 			efector.clic(posiciones[bandera][0], posiciones[bandera][1])
-			time.sleep(1)
+			#time.sleep(1)
 			bandera += 1
-			if bandera > 20:
+			if bandera > 483:
 				break
 	else:
 		print "No se esta jugando nada"
@@ -77,12 +77,7 @@ def main():
 			codigo en caso de no jugar
 		'''
 
-	
-	
 
-
-
-	
 
 if __name__ == '__main__':
 	main()

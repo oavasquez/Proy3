@@ -47,11 +47,11 @@ class MapeadorVectorial:
 				[497, 614], [606, 614],	[716, 614],	[825, 614]
 			]
 		elif self.juego_flood_it:
-			y = 228
-			for j in range(1, 14):
+			y = 212
+			for j in range(0, 22):
 				y += 20
-				x = 575
-				for i in range(1, 14):
+				x = 475
+				for i in range(0, 22):
 					x += 20
 					self.vector_de_posiciones.append([x, y])
 
