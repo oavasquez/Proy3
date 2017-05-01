@@ -5,6 +5,7 @@ from util.MinimizarVentanas import MinimizarVentanas
 from tensorflow.Red2048 import Red2048
 from efectores.Efectores import Efectores
 import time
+import numpy as np
 
 
 def main():
@@ -32,6 +33,14 @@ def main():
 	rn2048 = Red2048()
 
 
+	#ENTRENANDO LAS REDES NEURONALES
+	vectores_de_entrada = np.genfromtxt('data.csv', delimiter=',', dtype=int, usecols=(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15))
+	etiquetas = np.genfromtxt('data.csv', delimiter=',', dtype=int, usecols=(16, 17, 18, 19))
+	#rn2048.entrenar(vectores_de_entrada, etiquetas)
+
+
+
+
 	'''
 		******************************
 		 PARTE PRINCIPAL DEL PROGRAMA
@@ -45,12 +54,10 @@ def main():
 		bandera = 0
 		while True:
 			pantalla_2048 = capturador.capturar_completa()
-			print mapeador.consultar_colores(pantalla_2048)
-			efector.teclado(efector.tecla.up_key)
-			efector.teclado(efector.tecla.down_key)
-			efector.teclado(efector.tecla.left_key)
-			efector.teclado(efector.tecla.right_key)
-			time.sleep(1)
+			vector_de_entrada = mapeador.consultar_colores(pantalla_2048)
+			efector.teclado(efector.teclas_2048[0])
+			efector.teclado(efector.teclas_2048[2])
+			#time.sleep(1)
 			bandera += 1
 			if bandera > 30:
 				break
@@ -81,4 +88,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-

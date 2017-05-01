@@ -6,10 +6,10 @@ class Efectores:
 		self.tecla = PyKeyboard()
 		self.raton = PyMouse()
 		self.teclas_2048 = {
-			#0: tecla.up_key
-			#1: tecla.right_key
-			#2: tecla.down_key
-			#3: tecla.left_key
+			0: self.tecla.up_key,
+			1: self.tecla.right_key,
+			2: self.tecla.down_key,
+			3: self.tecla.left_key
 		}
 
 	def clic(self, posicion_x, posicion_y): 
