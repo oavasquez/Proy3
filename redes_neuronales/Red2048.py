@@ -1,4 +1,5 @@
 import tensorflow as tf
+import numpy as np
 import sys
 import os
 
@@ -22,7 +23,7 @@ class Red2048:
 		print "*"*30
 		print "ENTRENANDO"
 		print "*"*30
-		rutaCSV = os.getcwd() + '/entrenamiento/data_2048/'
+		rutaCSV = os.getcwd() + '/entrenamiento/2048/'
 
 		tf.reset_default_graph()
 		
@@ -52,7 +53,7 @@ class Red2048:
 
 
 	def predecir(self, tablero):
-		rutaCSV = os.getcwd() + '/entrenamiento/data_2048/'
+		rutaCSV = os.getcwd() + '/entrenamiento/2048/'
 
 		#Modelo
 		x = tf.placeholder(tf.float32, [None, 16]) #entrada
@@ -90,5 +91,17 @@ class Red2048:
 		'''
 
 
-	def metodo_a(self):
-		pass	
+	def leer_csv_vector_de_entrada(self, archivo):
+		vectores_de_entrada = []
+		return vectores_de_entrada.append(np.genfromtxt(archivo, delimiter=',', dtype=int, usecols=(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)))
+	
+
+	def leer_csv_salida_esperada(self, archivo):
+		tablero = []
+		return tablero.append(np.genfromtxt(archivo, delimiter=',', dtype=int, usecols=(16, 17, 18, 19)))	
+
+
+	def todos_los_cvs(self, ruta, extension=".csv" ):
+		archivos_csv = os.listdir(ruta)
+		return [ archivo for archivo in archivos_csv if archivo.endswith(extension) ]
+
