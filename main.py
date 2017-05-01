@@ -2,10 +2,11 @@ from sensores.CapturarPantalla import CapturarPantalla
 from sensores.Leer import Leer
 from sensores.MapeadorVectorial import MapeadorVectorial
 from util.MinimizarVentanas import MinimizarVentanas
-from tensorflow.Red2048 import Red2048
+from redes_neuronales.Red2048 import Red2048
 from efectores.Efectores import Efectores
 import time
 import numpy as np
+import tensorflow as tf
 
 
 def main():
@@ -36,7 +37,10 @@ def main():
 	#ENTRENANDO LAS REDES NEURONALES
 	vectores_de_entrada = np.genfromtxt('data.csv', delimiter=',', dtype=int, usecols=(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15))
 	etiquetas = np.genfromtxt('data.csv', delimiter=',', dtype=int, usecols=(16, 17, 18, 19))
+	#for i in range(len(vectores_de_entrada)):
+	#	rn2048.entrenar(vectores_de_entrada[i], etiquetas[i])
 	#rn2048.entrenar(vectores_de_entrada, etiquetas)
+	#print vectores_de_entrada
 
 
 
@@ -54,12 +58,15 @@ def main():
 		bandera = 0
 		while True:
 			pantalla_2048 = capturador.capturar_completa()
-			vector_de_entrada = mapeador.consultar_colores(pantalla_2048)
-			efector.teclado(efector.teclas_2048[0])
-			efector.teclado(efector.teclas_2048[2])
+			vector_de_entrada = []
+			vector_tablero = mapeador.consultar_colores(pantalla_2048)
+			vector_de_entrada.append(vector_tablero)
+			movimiento = rn2048.predecir(vector_de_entrada)
+			print movimiento
+			efector.teclado(efector.teclas_2048[movimiento[0]])
 			#time.sleep(1)
 			bandera += 1
-			if bandera > 30:
+			if bandera > 35:
 				break
 
 	elif leer.jugandoFloodit:
