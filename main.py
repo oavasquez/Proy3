@@ -76,7 +76,7 @@ def main():
 			mapeador.definir_posiciones()
 			vector_tablero = mapeador.consultar_colores(pantalla_2048)
 			vector_de_entrada.append(vector_tablero)
-			movimiento = rn2048.predecir(vector_de_entrada)
+			movimiento = rn_2048.predecir(vector_de_entrada)
 			print movimiento[0]
 			efector.teclado(efector.teclas_2048[movimiento[0]])
 			#time.sleep(1)
