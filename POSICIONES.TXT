@@ -35,7 +35,7 @@ FLOOD-IT:
 		CELDA #1:	x: 570	y: 223
 		CELDA #2:	x: 590	y: 223
 		CELDA #3:	x: 610	y: 223
-		...
+		. . .
 		CELDA #14:	x: 830	y: 223 
 		.
 		.
@@ -49,5 +49,5 @@ FLOOD-IT:
 		.
 		.
 		CELDA #183:	x: 570	y: 483
-		...
+		. . .
 		CELDA #196:	x: 830	y: 483

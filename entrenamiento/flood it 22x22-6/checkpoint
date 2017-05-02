@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/axelsomerseth/Proy3/entrenamiento/flood it 22x22-6/model.ckpt"
+all_model_checkpoint_paths: "/home/axelsomerseth/Proy3/entrenamiento/flood it 22x22-6/model.ckpt"

@@ -28,17 +28,18 @@ class MapeadorVectorial:
 			(237, 194, 46): 2048
 		}
 		self.colores_flood_it = { #UN MAPEO PARA LOS COLORES RGB DEL FLOOD-IT
-			(255, 255, 0): 0, #'amarillo'
-			(0, 255, 255): 1, #'cyan'
-			(128, 0, 128): 2, #'morado'
-			(255, 0, 0): 3, #'rojo'
-			(255, 204, 102): 4, #'salmon'
-			(0, 187, 0): 5, #'verde'
+			(255, 255, 0):		0, #'amarillo'
+			(0, 255, 255):		1, #'cyan'
+			(128, 0, 128):		2, #'morado'
+			(255, 0, 0):		3, #'rojo'
+			(255, 204, 102):	4, #'salmon'
+			(0, 187, 0):		5, #'verde'
 		}
 
 
 
 	def definir_posiciones(self):
+		self.vector_de_posiciones = []
 		if self.juego_2048:
 			self.vector_de_posiciones = [
 				[497, 286], [606, 286], [716, 286], [825, 286],
@@ -57,7 +58,7 @@ class MapeadorVectorial:
 
 
 	def consultar_colores(self, imagen):
-		self.definir_posiciones()
+		#self.definir_posiciones()
 		self.vector_de_numeros = []
 		self.imagen = imagen
 		img = Image.open(self.imagen)
@@ -96,3 +97,11 @@ class MapeadorVectorial:
 				break
 			else:
 				continue
+
+
+	def coordenadas_de_color(self, color):
+		indice = self.vector_de_numeros.index(color)
+		posiciones  = self.vector_de_posiciones
+		posiciones.reverse()
+		coordenadas = posiciones[indice]
+		return coordenadas

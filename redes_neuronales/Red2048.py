@@ -6,22 +6,16 @@ import os
 class Red2048:
 	def __init__(self):
 		self.dicc_movimientos = {
-			(0, 0, 0, 1): 0, #O: arriba
-			(0, 0, 1, 0): 1, #1: derecha
-			(0, 1, 0, 0): 2, #2: abajo
-			(1, 0, 0, 0): 3, #3: izquierda
+			(1, 0, 0, 0): 0, #0: arriba
+			(0, 1, 0, 0): 1, #1: derecha
+			(0, 0, 1, 0): 2, #2: abajo
+			(0, 0, 0, 1): 3, #3: izquierda
 		}
-		self.one_hot_vector_movimientos = [
-			[0, 0, 0, 1], 	#ARRIBA
-			[0, 0, 1, 0],	#DERECHA
-			[0, 1, 0, 0],	#ABAJO
-			[1, 0, 0, 0]	#IZQUIERDA
-		]
 
 
 	def entrenar(self, tablero, movimiento):
 		print "*"*30
-		print "ENTRENANDO"
+		print "			ENTRENANDO"
 		print "*"*30
 		rutaCSV = os.getcwd() + '/entrenamiento/2048/'
 
@@ -43,13 +37,13 @@ class Red2048:
 
 		saver = tf.train.Saver(var_list={"W": W, "b": b})
 
-
-		with tf.Session() as sess:
-			sess.run(init_op)
-			for i in range(1000):	
-				sess.run(train_step, feed_dict={x:tablero, y_:movimiento})
-				save_path = saver.save(sess, rutaCSV + 'model.ckpt')
-		print "\nHa terminado el aprendizaje!"
+		sess = tf.Session()
+		sess.run(init_op)
+		for i in range(2000):	
+			sess.run(train_step, feed_dict={x:tablero, y_:movimiento})
+			save_path = saver.save(sess, rutaCSV + 'model.ckpt')
+		sess.close()		
+		print "\n... Ha terminado el aprendizaje."
 
 
 	def predecir(self, tablero):
@@ -65,15 +59,7 @@ class Red2048:
 
 		saver = tf.train.Saver(var_list={"W": W, "b": b})
 
-		'''
-		with tf.Session() as sess:
-			sess.run(init_op)
-			saver.restore(sess, rutaCSV + 'model.ckpt')
-			prediction = tf.argmax(y, 1)
-			movimiento = (prediction.eval(feed_dict={x: tablero}, session=sess))
-		return movimiento
-		'''
-
+		#FUNCIONA
 		sess = tf.Session()
 		sess.run(init_op)
 		saver.restore(sess, rutaCSV + 'model.ckpt')
@@ -82,26 +68,29 @@ class Red2048:
 		sess.close()
 		return movimiento
 
-		'''
-		sess = tf.Session()
-		correct_prediction = tf.argmax(y, 1)
-		accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-		sess.run(accuracy, feed_dict={x: tablero})
-		return accuracy
-		'''
+
+	def todos_los_cvs(self, path_to_dir, suffix=".csv" ):
+		archivos_csv = os.listdir(path_to_dir)
+		return [ archivo for archivo in archivos_csv if archivo.endswith(suffix) ]
 
 
-	def leer_csv_vector_de_entrada(self, archivo):
-		vectores_de_entrada = []
-		return vectores_de_entrada.append(np.genfromtxt(archivo, delimiter=',', dtype=int, usecols=(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)))
-	
+	def vectores_del_tablero(self, ruta):
+		vctr_de_entrada = []
+		vctr_del_tablero = []
+		archivos_csv = self.todos_los_cvs(ruta)
+		for archivos in archivos_csv:
+			vctr_de_entrada = np.genfromtxt(ruta + archivos, delimiter=',', dtype=int, usecols=(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15))
+			for entrada in vctr_de_entrada:
+				vctr_del_tablero.append(entrada)
+		return vctr_del_tablero
 
-	def leer_csv_salida_esperada(self, archivo):
-		tablero = []
-		return tablero.append(np.genfromtxt(archivo, delimiter=',', dtype=int, usecols=(16, 17, 18, 19)))	
 
-
-	def todos_los_cvs(self, ruta, extension=".csv" ):
-		archivos_csv = os.listdir(ruta)
-		return [ archivo for archivo in archivos_csv if archivo.endswith(extension) ]
-
+	def vectores_de_movimientos(self, ruta):
+		vctr_de_salida = []
+		vctr_de_movimientos = []
+		archivos_csv = self.todos_los_cvs(ruta)
+		for archivos in archivos_csv:
+			vctr_de_salida = np.genfromtxt(ruta + archivos, delimiter=',', dtype=int, usecols=(16, 17, 18, 19))
+			for salida in vctr_de_salida:
+				vctr_de_movimientos.append(salida)
+		return vctr_de_movimientos
